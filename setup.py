@@ -12,6 +12,7 @@ BUILD_DIR.mkdir(exist_ok=True)
 
 # Download C-lang dependency
 with urllib.request.urlopen("https://github.com/Tiiffi/mcrcon/archive/master.zip") as response, open(BUILD_DIR / 'master.zip', 'wb') as outfile:
+  #response.read().decode('utf-8')
   shutil.copyfileobj(response, outfile)
 
 # Unzip repo
