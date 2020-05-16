@@ -1,3 +1,5 @@
+<img height=150 src="img/Cyan_Parrot.png">
+
 # parrot
 
 Exposes Minecraft RCON as a REST API. Driven by subprocess calls to [Tiiffi/mcrcon](https://github.com/Tiiffi/mcrcon).
