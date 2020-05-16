@@ -16,7 +16,6 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/au5ton/parrot",
     packages=setuptools.find_packages(),
-    scripts=['parrot/scripts/parrot-mc.py'],
     install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 3",
