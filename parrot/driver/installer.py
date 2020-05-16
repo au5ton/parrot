@@ -84,6 +84,9 @@ def checkExists() -> bool:
 def getDefaultInstall() -> Path:
   return Path.home() / '.parrot-mc'
 
+def getConfig() -> Path:
+  return getDefaultInstall() / 'config.ini'
+
 def getBinary() -> str:
   BUILD_DIR = getDefaultInstall()
   # Determine the correct platform for the driver
