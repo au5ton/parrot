@@ -17,6 +17,7 @@ config.read(args.config)
 from flask import Flask
 from flask.json import jsonify
 from parrot.driver.mcrcon import MCRCON
+from parrot import parser
 with open(Path(__file__).parent / 'species.json') as f:
   SPECIES_LIST = json.load(f)
 
@@ -33,7 +34,15 @@ def index():
 
 @app.route('/api/cmd/<command>')
 def cmd(command):
-  return driver.rawcmd(command)
+  return jsonify(driver.rawcmd(command))
+
+@app.route('/api/list')
+def listp():
+  return jsonify(parser.listPlayers(driver.rawcmd('list')))
+
+@app.route('/api/slots')
+def slots():
+  return jsonify(parser.listSlots(driver.rawcmd('list')))
 
 if __name__ == '__main__':
   app.run()
