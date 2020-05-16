@@ -28,9 +28,12 @@ driver = MCRCON(
   )
 
 @app.route('/')
-def hello_world():
+def index():
   return f'Hello, {random.choice(SPECIES_LIST)}!'
-  #return driver.rawcmd('list')
+
+@app.route('/api/cmd/<command>')
+def cmd(command):
+  return driver.rawcmd(command)
 
 if __name__ == '__main__':
   app.run()
