@@ -12,7 +12,9 @@ parser = argparse.ArgumentParser(description='Start the server')
 parser.add_argument('--config', action='store', default=str(installer.getConfig()), help=f'location where the config.ini can be found (default: {installer.getConfig()})')
 args = parser.parse_args()
 config = ConfigParser()
-config.read(args.config)
+if len(config.read(args.config)) == 0:
+  print(f'A config.ini file could not be read from {args.config}')
+  exit(1)
 
 from flask import Flask
 from flask.json import jsonify
@@ -23,9 +25,9 @@ with open(Path(__file__).parent / 'species.json') as f:
 
 app = Flask(__name__)
 driver = MCRCON(
-  host=config["MCRCON"]["MCRCON_HOST"],
-  port=config["MCRCON"]["MCRCON_PORT"],
-  passwd=config["MCRCON"]["MCRCON_PASS"]
+  host=os.environ.get('MCRCON_HOST') if os.environ.get('MCRCON_HOST') is not None else config["MCRCON"]["MCRCON_HOST"],
+  port=os.environ.get('MCRCON_PORT') if os.environ.get('MCRCON_PORT') is not None else config["MCRCON"]["MCRCON_PORT"],
+  passwd=os.environ.get('MCRCON_PASS') if os.environ.get('MCRCON_PASS') is not None else config["MCRCON"]["MCRCON_PASS"]
   )
 
 @app.route('/')
