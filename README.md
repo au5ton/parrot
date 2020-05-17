@@ -10,17 +10,15 @@ Exposes Minecraft RCON as a REST API. Driven by subprocess calls to [Tiiffi/mcrc
 - Clone repo
 - `pip3 install -r requirements.txt`
 - `mkdir ~/.parrot-mc`
-- `cp config.example.ini ~/.parrot-mc/config.ini`
-- Update MCRCON information in your preferred text editor: 
+- Update configuration:
+  - (Option 1): Create a config.ini file
   
-  `nano ~/.parrot-mc/config.ini`
-
-- Get help:
-
-  `./server.py --help`
+    `cp config.example.ini ~/.parrot-mc/config.ini`
+  
+  - (Option 2): Specify these environment variables at runtime: `MCRCON_HOST`, `MCRCON_PORT`, `MCRCON_PASS`.
 
 - Run the server:
   
-  `./server.py`
+  `gunicorn server:app`
 
-- Access the server: `http://127.0.0.1:5000/`
+- Access the server: `http://127.0.0.1:8000/`
