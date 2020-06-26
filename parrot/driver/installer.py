@@ -16,7 +16,6 @@ def downloadFile(url: str, outpath: str) -> None:
     # returns for convenience
     return str(outpath)
 
-
 def installGithubReleases(BUILD_DIR: Path) -> None:
   # Get release information for binary dependent
   with urllib.request.urlopen("https://api.github.com/repos/Tiiffi/mcrcon/releases/latest") as response:
@@ -80,6 +79,11 @@ def install() -> None:
 def checkExists() -> bool:
   BUILD_DIR = getDefaultInstall()
   return BUILD_DIR.exists()
+
+def checkInstalled() -> bool:
+  if checkExists():
+    return Path(getBinary()).exists()
+  return false
 
 def getDefaultInstall() -> Path:
   return Path.home() / '.parrot-mc'

@@ -13,7 +13,7 @@ def remove_control_characters(s):
   reaesc = re.compile(r'\x1b[^m]*m')
   return reaesc.sub('', s)
 
-if not installer.checkExists():
+if not installer.checkInstalled():
   installer.install()
 
 
