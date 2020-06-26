@@ -4,6 +4,7 @@
 
 Exposes Minecraft RCON as a REST API. Driven by subprocess calls to [Tiiffi/mcrcon](https://github.com/Tiiffi/mcrcon).
 
+When the server is started, [Tiiffi/mcrcon](https://github.com/Tiiffi/mcrcon) is installed to `~/.parrot-mc/` and the files are `chmod`'d to have execute permission. If this action is impossible in your environment, manually modifying Parrot might be necessary.
 
 ## Installation + Usage
 
