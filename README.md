@@ -34,4 +34,4 @@ When the server is started, [Tiiffi/mcrcon](https://github.com/Tiiffi/mcrcon) is
 ### `GET /api/cmd/<command>`
 ### `GET /api/list`
 ### `GET /api/slots`
-### `GET /api/player/<player>
+### `GET /api/player/<player>`
