@@ -51,5 +51,9 @@ def listp():
 def slots():
   return jsonify(parser.listSlots(driver.rawcmd('list')))
 
+@app.route('/api/player/<player>')
+def player(player):
+  return parser.dataGetEntity(driver.rawcmd(f'data get entity @p[name={player}]'))
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0')
