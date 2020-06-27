@@ -2,6 +2,7 @@
 import re
 import json
 import string
+from parrot.driver import node
 
 '''
 There are 0 of a max 20 players online:
@@ -41,17 +42,19 @@ def dataGetEntity(raw: str):
   else:
     # extract Mojang-son
     mson = raw[(raw.find(selector) + len(selector)):]
-    print(mson)
-    # fix doubles
+    # fix doubles (123.456d)
     temp = re.sub(r'([0-9])d', r'\1', mson)
-    # fix floats
+    # fix floats (123.456f)
     temp = re.sub(r'([0-9])f', r'\1', temp)
-    # fix bytes
-    temp = re.sub(r'([0-1])b', r'\1', temp)
-    # fix seconds
+    # fix bytes (0b, 1b)
+    temp = re.sub(r'0b', 'false', temp)
+    temp = re.sub(r'1b', 'true', temp)
+    # fix seconds (123s)
     temp = re.sub(r'([0-9])s', r'\1', temp)
-    # fix quotes
-    #temp = re.sub(r'([A-z]+):', r'"\1":', temp)
-    # fix UUID
+    # fix UUID ([I; 1577784142, -539867416, -1716572465, -495806708])
     temp = re.sub(r'I;', '', temp)
-    return temp
+    # fix quotes (literally just use JavaScript to get back JSON)
+    data = node.eval(f'''
+    console.log(JSON.stringify({temp}))
+    ''')
+    return data

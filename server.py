@@ -53,7 +53,7 @@ def slots():
 
 @app.route('/api/player/<player>')
 def player(player):
-  return parser.dataGetEntity(driver.rawcmd(f'data get entity @p[name={player}]'))
+  return jsonify(json.loads(parser.dataGetEntity(driver.rawcmd(f'data get entity @p[name={player}]'))))
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0')
